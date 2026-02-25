@@ -20,7 +20,7 @@ const WeddingContent = () => {
       {/* Families Request */}
       <ScrollReveal>
         <p className="font-body text-[12px] sm:text-xs tracking-[0.3em] uppercase text-muted-foreground leading-relaxed max-w-xs mx-auto">
-          The Families Of <span className="text-primary font-semibold">Arko</span> And <span className="text-primary font-semibold">Sam</span> Request The Pleasure Of Your Company At The Solemnisation And Traditional Wedding Between
+          The Families Of <span className="text-primary font-semibold">Arko</span> And <span className="text-primary font-semibold">Sam</span> Request The Pleasure Of Your Company At The Solemnisation Ceremony Between
         </p>
       </ScrollReveal>
 
@@ -60,7 +60,7 @@ const WeddingContent = () => {
 
       <ScrollReveal>
         <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground">
-          At 10:00 AM • PROMPT
+          At 12:00 PM • PROMPT
         </p>
       </ScrollReveal>
 
