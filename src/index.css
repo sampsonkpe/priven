@@ -2,6 +2,95 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-cream text-coffee font-body antialiased;
+@layer base {
+  :root {
+    --background: 40 40% 98%;
+    --foreground: 25 35% 16%;
+
+    --card: 38 33% 96%;
+    --card-foreground: 25 30% 22%;
+
+    --popover: 38 33% 96%;
+    --popover-foreground: 25 30% 22%;
+
+    --primary: 43 55% 52%;
+    --primary-foreground: 38 33% 96%;
+
+    --secondary: 35 20% 88%;
+    --secondary-foreground: 25 30% 22%;
+
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 18% 34%;
+
+    --accent: 43 55% 52%;
+    --accent-foreground: 38 33% 96%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 43 35% 74%;
+    --input: 35 20% 85%;
+    --ring: 43 55% 52%;
+
+    --radius: 0.25rem;
+
+    --gold: 43 55% 52%;
+    --gold-light: 43 50% 70%;
+    --coffee: 25 30% 22%;
+    --coffee-light: 25 15% 45%;
+    --cream: 38 33% 96%;
+    --cream-dark: 35 20% 90%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-size: 15px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Subtle grain texture overlay */
+.grain-bg {
+  position: relative;
+}
+.grain-bg::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Gold divider */
+.gold-divider {
+  width: 60px;
+  height: 1px;
+  background: hsl(var(--gold));
+  margin: 0 auto;
+}
+
+.gold-divider-wide {
+  width: 120px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--gold)),
+    transparent
+  );
+  margin: 0 auto;
 }
