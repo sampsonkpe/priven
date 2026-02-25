@@ -11,11 +11,11 @@ const WeddingContent = () => {
       </ScrollReveal>
 
       {/* Divider */}
-      <div className="h-24" />
+      <div className="h-20" />
       <ScrollReveal>
         <div className="gold-divider" />
       </ScrollReveal>
-      <div className="h-24" />
+      <div className="h-20" />
 
       {/* Families Request */}
       <ScrollReveal>
@@ -47,7 +47,7 @@ const WeddingContent = () => {
         </h1>
       </ScrollReveal>
 
-      <div className="h-24" />
+      <div className="h-20" />
 
       {/* Date & Time */}
       <ScrollReveal>
@@ -60,16 +60,16 @@ const WeddingContent = () => {
 
       <ScrollReveal>
         <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground">
-          At 10:00 AM PROMPT
+          At 10:00 AM • PROMPT
         </p>
       </ScrollReveal>
 
       {/* Divider */}
-      <div className="h-24" />
+      <div className="h-20" />
       <ScrollReveal>
         <div className="gold-divider" />
       </ScrollReveal>
-      <div className="h-24" />
+      <div className="h-20" />
 
       {/* Venue */}
       <ScrollReveal>
@@ -92,11 +92,11 @@ const WeddingContent = () => {
       </ScrollReveal>
 
       {/* Divider */}
-      <div className="h-24" />
+      <div className="h-20" />
       <ScrollReveal>
         <div className="gold-divider" />
       </ScrollReveal>
-      <div className="h-24" />
+      <div className="h-20" />
 
       {/* Scripture */}
       <ScrollReveal>
@@ -115,11 +115,10 @@ const WeddingContent = () => {
       </ScrollReveal>
 
       {/* Divider */}
-      <div className="h-24" />
+      <div className="h-20" />
       <ScrollReveal>
         <div className="gold-divider" />
       </ScrollReveal>
-      <div className="h-16" />
     </main>
   );
 };

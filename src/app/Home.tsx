@@ -24,12 +24,12 @@ const Home = () => {
         >
           <WeddingContent />
           <RSVPForm />
-          <div className="h-16" />
+          <div className="h-4" />
           <ScrollReveal>
             <div className="gold-divider" />
           </ScrollReveal>
 
-          <div className="h-16" />
+          <div className="h-10" />
           
           <ScrollReveal>
             <footer className="pb-20 text-center">
