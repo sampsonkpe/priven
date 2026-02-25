@@ -50,13 +50,13 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
   return (
     <motion.div
       onClick={phase >= 4 ? handleDismiss : undefined}
-      className="fixed inset-0 z-40 flex items-center justify-center bg-background grain-bg overflow-hidden"
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background grain-bg overflow-hidden"
       animate={exiting ? { opacity: 0, scale: 1.02 } : { opacity: 1, scale: 1 }}
       transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
     >
       <motion.div
         className="relative text-center px-6 w-full max-w-md flex flex-col items-center"
-        animate={pushed ? { y: -24 } : { y: 0 }}
+        animate={pushed ? { y: -16 } : { y: 24 }}
         transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
       >
         {/* Prince Charles */}
@@ -106,28 +106,29 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
         />
 
         {/* Scroll hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={phase >= 4 ? { opacity: 1 } : {}}
-          transition={{ duration: 1.2, delay: 0.4 }}
-          className="absolute left-1/2 -translate-x-1/2 bottom-16"
-        >
-          <motion.p
-            animate={phase >= 4 && !exiting ? { y: [0, -6, 0] } : {}}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-[10px] font-body tracking-[0.4em] uppercase text-muted-foreground/60 cursor-pointer"
-            onClick={handleDismiss}
-          >
-            Scroll to open
-          </motion.p>
+        {phase >= 4 && (
           <motion.div
-            animate={
-              phase >= 4 && !exiting ? { y: [0, 4, 0], opacity: [0.3, 0.6, 0.3] } : {}
-            }
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="mx-auto mt-3 w-px h-8 bg-primary/40"
-          />
-        </motion.div>
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+            className="mt-14"
+          >
+            <motion.p
+              animate={!exiting ? { y: [0, -6, 0] } : {}}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-[10px] font-body tracking-[0.4em] uppercase text-muted-foreground/60 cursor-pointer text-center"
+              onClick={handleDismiss}
+            >
+              Scroll to open
+            </motion.p>
+
+            <motion.div
+              animate={!exiting ? { y: [0, 4, 0], opacity: [0.3, 0.6, 0.3] } : {}}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="mx-auto mt-3 w-px h-8 bg-primary/40"
+            />
+          </motion.div>
+        )}
       </motion.div>
     </motion.div>
   );

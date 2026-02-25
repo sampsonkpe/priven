@@ -5,7 +5,7 @@ const WeddingContent = () => {
     <main className="min-h-screen px-6 pt-32 pb-16 max-w-lg mx-auto text-center">
       {/* We Are Getting Married */}
       <ScrollReveal>
-        <p className="font-body text-[10px] sm:text-xs tracking-[0.45em] uppercase text-muted-foreground">
+        <p className="font-body text-[12px] sm:text-xs tracking-[0.45em] uppercase text-muted-foreground">
           We Are Getting Married
         </p>
       </ScrollReveal>
@@ -19,7 +19,7 @@ const WeddingContent = () => {
 
       {/* Families Request */}
       <ScrollReveal>
-        <p className="font-body text-[10px] sm:text-xs tracking-[0.3em] uppercase text-muted-foreground leading-relaxed max-w-xs mx-auto">
+        <p className="font-body text-[12px] sm:text-xs tracking-[0.3em] uppercase text-muted-foreground leading-relaxed max-w-xs mx-auto">
           The Families Of <span className="text-primary font-semibold">Arko</span> And <span className="text-primary font-semibold">Sam</span> Request The Pleasure Of Your Company At The Solemnisation And Traditional Wedding Between
         </p>
       </ScrollReveal>
@@ -60,7 +60,7 @@ const WeddingContent = () => {
 
       <ScrollReveal>
         <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground">
-          At 11:00 AM
+          At 10:00 AM PROMPT
         </p>
       </ScrollReveal>
 
@@ -100,16 +100,16 @@ const WeddingContent = () => {
 
       {/* Scripture */}
       <ScrollReveal>
-        <p className="font-body text-[11px] tracking-[0.08em] uppercase text-muted-foreground italic leading-relaxed">
+        <p className="font-body text-[12px] tracking-[0.08em] uppercase text-muted-foreground italic leading-relaxed">
           "He Who Finds A Wife Finds A Good Thing,<br />
-          And Obtains Favor From The Lord."
+          And Obtains Favour From The Lord."
         </p>
       </ScrollReveal>
 
       <div className="h-6" />
 
       <ScrollReveal>
-        <p className="font-body text-[10px] tracking-[0.35em] uppercase text-muted-foreground/60">
+        <p className="font-body text-[12px] tracking-[0.35em] uppercase text-muted-foreground/60">
           Proverbs 18:22 · NKJV
         </p>
       </ScrollReveal>
