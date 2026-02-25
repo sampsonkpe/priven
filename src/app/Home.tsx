@@ -9,7 +9,7 @@ const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   return (
-    <div className="grain-bg bg-background min-h-screen relative overflow-hidden">
+    <div className="grain-bg bg-background min-h-screen relative">
       <AnimatePresence mode="wait">
         {showSplash && (
           <SplashScreen key="splash" onDismiss={() => setShowSplash(false)} />
@@ -51,7 +51,7 @@ const Home = () => {
 
             <ScrollReveal>
               <footer className="pb-20 text-center">
-                <p className="font-serif text-[10px] tracking-[0.4em] uppercase text-muted-foreground/40">
+                <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
                   With Love & Joy
                 </p>
               </footer>
