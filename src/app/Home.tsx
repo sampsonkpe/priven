@@ -38,7 +38,7 @@ const Home = () => {
               ease: [0.25, 0.1, 0.25, 1],
               delay: 0.1,
             }}
-            className="relative"
+            className="relative z-10"
           >
             <WeddingContent />
             <RSVPForm />
