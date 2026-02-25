@@ -38,7 +38,7 @@ const RSVPForm = () => {
       });
 
       setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 5000);
+      setTimeout(() => setSubmitted(false), 10000);
 
       setFullName("");
       setPhone("");
@@ -157,12 +157,11 @@ const RSVPForm = () => {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             className="mt-6 max-w-sm mx-auto border border-primary/50 px-6 py-4 text-center"
           >
-            <p className="font-serif text-sm uppercase tracking-[0.15em] text-foreground">Thank You</p>
             <p className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground font-body mt-1">
-              Your RSVP Has Been Received
+              Thank You. Your RSVP Has Been Received.<br />We Look Forward To Celebrating With You!
             </p>
           </motion.div>
         )}

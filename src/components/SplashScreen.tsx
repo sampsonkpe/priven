@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 
+const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
   const [phase, setPhase] = useState(0);
   const [exiting, setExiting] = useState(false);
@@ -8,14 +10,13 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setPhase(1), 600),
-      setTimeout(() => setPhase(2), 2000),
-      setTimeout(() => setPhase(3), 3400),
+      setTimeout(() => setPhase(1), 1200),
+      setTimeout(() => setPhase(2), 2600),
+      setTimeout(() => setPhase(3), 4000),
       setTimeout(() => {
         setPhase(4);
-        // After scroll hint appears, push names up after 0.5s
-        setTimeout(() => setPushed(true), 500);
-      }, 4800),
+        setTimeout(() => setPushed(true), 900);
+      }, 5600),
     ];
     return () => timers.forEach(clearTimeout);
   }, []);
@@ -23,7 +24,7 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
   const handleDismiss = useCallback(() => {
     if (phase >= 4 && !exiting) {
       setExiting(true);
-      setTimeout(onDismiss, 900);
+      setTimeout(onDismiss, 1300);
     }
   }, [phase, exiting, onDismiss]);
 
@@ -51,74 +52,73 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
     <motion.div
       onClick={phase >= 4 ? handleDismiss : undefined}
       className="fixed inset-0 z-40 bg-background grain-bg overflow-hidden"
-      animate={exiting ? { opacity: 0, scale: 1.02 } : { opacity: 1, scale: 1 }}
-      transition={{ duration: 0.85, ease: [0.4, 0, 0.2, 1] }}
+      animate={exiting ? { opacity: 0, scale: 1.015 } : { opacity: 1, scale: 1 }}
+      transition={{ duration: 1.2, ease: easeSilk }}
     >
-      {/* This wrapper pushes the whole block down into the middle of the viewport */}
       <div className="h-full w-full flex justify-start items-center">
-        <div className="w-full pt-[28vh] sm:pt-[30vh] px-6 flex justify-center">
+        <div className="w-full pt-[30vh] sm:pt-[32vh] px-6 flex justify-center">
           <motion.div
             className="text-center w-full max-w-md flex flex-col items-center"
-            animate={pushed ? { y: -28 } : { y: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
+            animate={pushed ? { y: -32 } : { y: 0 }}
+            transition={{ duration: 1.4, ease: easeSilk }}
           >
             {/* Prince Charles */}
             <motion.p
-              initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+              initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
               animate={phase >= 1 ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-              transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="font-serif text-2xl sm:text-3xl tracking-[0.15em] uppercase text-foreground"
+              transition={{ duration: 1.6, ease: easeSilk }}
+              className="font-serif text-3xl sm:text-4xl tracking-[0.12em] uppercase text-foreground leading-relaxed"
             >
               Prince Charles
             </motion.p>
 
-            {/* Gold line under Prince Charles */}
+            {/* Gold line */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={phase >= 1 ? { scaleX: 1 } : {}}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 1.6, delay: 0.4, ease: easeSilk }}
               className="w-16 h-px bg-primary origin-center mt-6"
             />
 
             {/* + symbol */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.5, rotate: -45 }}
+              initial={{ opacity: 0, scale: 0.6, rotate: -25 }}
               animate={phase >= 2 ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-              className="my-6"
+              transition={{ duration: 1.2, ease: easeSilk }}
+              className="my-8"
             >
               <span className="text-primary text-3xl font-light">+</span>
             </motion.div>
 
             {/* Venissa */}
             <motion.p
-              initial={{ opacity: 0, y: 30, filter: "blur(4px)" }}
+              initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
               animate={phase >= 3 ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
-              transition={{ duration: 1.1, ease: [0.25, 0.1, 0.25, 1] }}
-              className="font-serif text-2xl sm:text-3xl tracking-[0.15em] uppercase text-foreground"
+              transition={{ duration: 1.6, ease: easeSilk }}
+              className="font-serif text-3xl sm:text-4xl tracking-[0.12em] uppercase text-foreground leading-relaxed"
             >
               Venissa
             </motion.p>
 
-            {/* Gold line under Venissa */}
+            {/* Gold line */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={phase >= 3 ? { scaleX: 1 } : {}}
-              transition={{ duration: 1.2, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
+              transition={{ duration: 1.6, delay: 0.4, ease: easeSilk }}
               className="w-16 h-px bg-primary origin-center mt-6"
             />
 
-            {/* Scroll hint (appears under names, pushes block up slightly) */}
+            {/* Scroll hint */}
             {phase >= 4 && (
               <motion.div
-                initial={{ opacity: 0, y: 12 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.2, delay: 0.2 }}
-                className="mt-14"
+                transition={{ duration: 1.4, ease: easeSilk }}
+                className="mt-16"
               >
                 <motion.p
-                  animate={!exiting ? { y: [0, -6, 0] } : {}}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={!exiting ? { y: [0, -5, 0] } : {}}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                   className="text-[12px] font-body tracking-[0.4em] uppercase text-muted-foreground/60 cursor-pointer text-center"
                   onClick={handleDismiss}
                 >
@@ -126,8 +126,8 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
                 </motion.p>
 
                 <motion.div
-                  animate={!exiting ? { y: [0, 4, 0], opacity: [0.3, 0.6, 0.3] } : {}}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={!exiting ? { y: [0, 6, 0], opacity: [0.3, 0.6, 0.3] } : {}}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
                   className="mx-auto mt-3 w-px h-8 bg-primary/40"
                 />
               </motion.div>
