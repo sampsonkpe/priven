@@ -52,16 +52,31 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
     <motion.div
       onClick={phase >= 4 ? handleDismiss : undefined}
       className="fixed inset-0 z-40 bg-background grain-bg overflow-hidden"
-      animate={exiting ? { opacity: 0, scale: 1.015 } : { opacity: 1, scale: 1 }}
+      animate={
+        exiting ? { opacity: 0, scale: 1.015 } : { opacity: 1, scale: 1 }
+      }
       transition={{ duration: 1.2, ease: easeSilk }}
     >
       <div className="h-full w-full flex justify-start items-center">
-        <div className="w-full pt-[30vh] sm:pt-[32vh] px-6 flex justify-center">
+        <div className="w-full pt-[20vh] sm:pt-[18vh] px-6 flex justify-center">
           <motion.div
             className="text-center w-full max-w-md flex flex-col items-center"
             animate={pushed ? { y: -32 } : { y: 0 }}
             transition={{ duration: 1.4, ease: easeSilk }}
           >
+            {/* Priven monogram */}
+            <motion.img
+              src="/privenlogo.png"
+              alt="Priven Monogram"
+              draggable={false}
+              initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+              animate={
+                phase >= 1 ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}
+              }
+              transition={{ duration: 1.6, ease: easeSilk }}
+              className="mb-8 h-20 w-20 sm:h-20 sm:w-20 object-contain"
+            />
+
             {/* Prince Charles */}
             <motion.p
               initial={{ opacity: 0, y: 40, filter: "blur(6px)" }}
@@ -78,11 +93,7 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={phase >= 1 ? { scaleX: 1 } : {}}
-              transition={{
-                duration: 1.6,
-                delay: 0.4,
-                ease: easeSilk,
-              }}
+              transition={{ duration: 1.6, delay: 0.4, ease: easeSilk }}
               className="w-16 h-px bg-primary origin-center mt-6"
             />
 
@@ -98,26 +109,16 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
                     }
                   : {}
               }
-              transition={{
-                duration: 1.6,
-                ease: easeSilk,
-              }}
+              transition={{ duration: 1.6, ease: easeSilk }}
               className="my-8"
             >
               <motion.span
                 animate={
                   phase >= 2 && !exiting
-                    ? {
-                        y: [0, -3, 0],
-                        opacity: [1, 0.85, 1],
-                      }
+                    ? { y: [0, -3, 0], opacity: [1, 0.85, 1] }
                     : {}
                 }
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 className="text-primary text-3xl font-light"
               >
                 +
@@ -140,11 +141,7 @@ const SplashScreen = ({ onDismiss }: { onDismiss: () => void }) => {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={phase >= 3 ? { scaleX: 1 } : {}}
-              transition={{
-                duration: 1.6,
-                delay: 0.4,
-                ease: easeSilk,
-              }}
+              transition={{ duration: 1.6, delay: 0.4, ease: easeSilk }}
               className="w-16 h-px bg-primary origin-center mt-6"
             />
 
