@@ -60,8 +60,19 @@ const WeddingContent = () => {
 
       <ScrollReveal>
         <p className="font-body text-xs tracking-[0.3em] uppercase text-muted-foreground">
-          At 12:00 PM • PROMPT
+          At 12:00 PM • GMT
         </p>
+      </ScrollReveal>
+
+      <div className="h-8" />
+
+      <ScrollReveal>
+        <a
+          href="/priven-wedding.ics"
+          className="inline-block px-8 py-2.5 border border-primary text-primary font-body text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+        >
+          Add To Calendar
+        </a>
       </ScrollReveal>
 
       {/* Divider */}
