@@ -1,76 +1,55 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import SplashScreen from "../components/SplashScreen";
+import { motion } from "framer-motion";
 import WeddingContent from "../components/WeddingContent";
 import RSVPForm from "../components/RSVPForm";
 import ScrollReveal from "../components/ScrollReveal";
 import PageNav from "../components/PageNav";
 
 const Home = () => {
-  const [showSplash, setShowSplash] = useState(() => {
-    if (typeof window === "undefined") return true;
-    return sessionStorage.getItem("priven_splash_seen") !== "1";
-  });
-
-  const handleDismissSplash = () => {
-    sessionStorage.setItem("priven_splash_seen", "1");
-    setShowSplash(false);
-  };
-
   return (
     <div className="grain-bg bg-background min-h-screen relative">
-      <AnimatePresence mode="wait">
-        {showSplash && (
-          <SplashScreen key="splash" onDismiss={handleDismissSplash} />
-        )}
-      </AnimatePresence>
+      <PageNav />
 
-      {!showSplash && (
-        <>
-          <PageNav />
+      {/* Subtle watermark */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 flex items-start justify-center pt-24 sm:pt-28"
+      >
+        <img
+          src="/privenlogo.png"
+          alt=""
+          className="w-[420px] sm:w-[600px] opacity-[0.025] blur-[0.1px]"
+        />
+      </div>
 
-          {/* Subtle watermark */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none fixed inset-0 z-0 flex items-start justify-center pt-24 sm:pt-28"
-          >
-            <img
-              src="/privenlogo.png"
-              alt=""
-              className="w-[420px] sm:w-[600px] opacity-[0.025] blur-[0.1px]"
-            />
-          </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          duration: 1,
+          ease: [0.25, 0.1, 0.256, 1],
+          delay: 0.1,
+        }}
+        className="relative z-10"
+      >
+        <WeddingContent />
+        <RSVPForm />
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.1, 0.256, 1],
-              delay: 0.1,
-            }}
-            className="relative z-10"
-          >
-            <WeddingContent />
-            <RSVPForm />
-            <div className="h-4" />
+        <div className="h-4" />
 
-            <ScrollReveal>
-              <div className="gold-divider" />
-            </ScrollReveal>
+        <ScrollReveal>
+          <div className="gold-divider" />
+        </ScrollReveal>
 
-            <div className="h-10" />
+        <div className="h-10" />
 
-            <ScrollReveal>
-              <footer className="pb-20 text-center">
-                <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
-                  With Love & Joy
-                </p>
-              </footer>
-            </ScrollReveal>
-          </motion.div>
-        </>
-      )}
+        <ScrollReveal>
+          <footer className="pb-20 text-center">
+            <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
+              With Love & Joy
+            </p>
+          </footer>
+        </ScrollReveal>
+      </motion.div>
     </div>
   );
 };

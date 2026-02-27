@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const navLinks = [
-  { to: "/", label: "Home" },
+  { to: "/home", label: "Home" },
   // { to: "/moments", label: "Moments" },
   { to: "/blessings", label: "Blessings" },
   { to: "/programme", label: "Programme" },
