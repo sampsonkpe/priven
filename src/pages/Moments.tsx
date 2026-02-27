@@ -157,7 +157,7 @@ const Moments = () => {
 
         <footer className="py-10 text-center flex flex-col items-center justify-center gap-6">
           <div className="gold-divider" />
-          <p className="font-serif text-[10px] tracking-[0.4em] uppercase text-muted-foreground/40">
+          <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
             With Love & Joy
           </p>
         </footer>
