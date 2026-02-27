@@ -104,7 +104,7 @@ const Moments = () => {
               <>
                 <div className="h-20" />
                 <ScrollReveal>
-                  <div className="gold-divider-wide" />
+                  <div className="gold-divider" />
                 </ScrollReveal>
                 <div className="h-20" />
               </>
