@@ -35,7 +35,7 @@ const PageNav = () => {
               {isActive && (
                 <motion.div
                   layoutId="nav-indicator"
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-px bg-primary"
+                  className="absolute bottom-0 left-0 right-0 mx-auto w-4 h-px bg-primary"
                   transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
                 />
               )}

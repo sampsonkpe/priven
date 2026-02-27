@@ -7,19 +7,28 @@ import ScrollReveal from "../components/ScrollReveal";
 import PageNav from "../components/PageNav";
 
 const Home = () => {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(() => {
+    if (typeof window === "undefined") return true;
+    return sessionStorage.getItem("priven_splash_seen") !== "1";
+  });
+
+  const handleDismissSplash = () => {
+    sessionStorage.setItem("priven_splash_seen", "1");
+    setShowSplash(false);
+  };
 
   return (
     <div className="grain-bg bg-background min-h-screen relative">
       <AnimatePresence mode="wait">
         {showSplash && (
-          <SplashScreen key="splash" onDismiss={() => setShowSplash(false)} />
+          <SplashScreen key="splash" onDismiss={handleDismissSplash} />
         )}
       </AnimatePresence>
 
       {!showSplash && (
         <>
           <PageNav />
+
           {/* Subtle watermark */}
           <div
             aria-hidden="true"
@@ -45,6 +54,7 @@ const Home = () => {
             <WeddingContent />
             <RSVPForm />
             <div className="h-4" />
+
             <ScrollReveal>
               <div className="gold-divider" />
             </ScrollReveal>
