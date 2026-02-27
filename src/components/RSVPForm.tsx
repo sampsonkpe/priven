@@ -4,16 +4,17 @@ import ScrollReveal from "./ScrollReveal";
 
 const GOOGLE_SCRIPT_URL = import.meta.env.VITE_GOOGLE_SCRIPT_URL || "";
 
+const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 const RSVPForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [numberAttending, setNumberAttending] = useState(1);
+  const [plusOne, setPlusOne] = useState(false);
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const isValid =
-    fullName.trim() !== "" && phone.trim() !== "" && numberAttending >= 1;
+  const isValid = fullName.trim() !== "" && phone.trim() !== "";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ const RSVPForm = () => {
         body: JSON.stringify({
           name: fullName,
           phone,
-          count: numberAttending,
+          count: plusOne ? 2 : 1,
           message: note,
           ua: navigator.userAgent,
         }),
@@ -42,10 +43,10 @@ const RSVPForm = () => {
 
       setFullName("");
       setPhone("");
-      setNumberAttending(1);
+      setPlusOne(false);
       setNote("");
     } catch {
-      // optional: show a subtle error message later
+      // silently handle for now
     } finally {
       setSubmitting(false);
     }
@@ -54,7 +55,7 @@ const RSVPForm = () => {
   return (
     <section className="py-10 px-6">
       <ScrollReveal>
-        <h2 className="font-serif text-xl sm:text-2xl tracking-[0.15em] uppercase text-center text-foreground mb-2">
+        <h2 className="font-serif text-xl sm:text-2xl tracking-[0.15em] uppercase text-center text-foreground mb-6">
           Will You Join Us?
         </h2>
       </ScrollReveal>
@@ -69,7 +70,9 @@ const RSVPForm = () => {
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-4 font-body">
         <ScrollReveal delay={0.1}>
           <label className="block">
-            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">Full Name</span>
+            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
+              Full Name
+            </span>
             <input
               type="text"
               value={fullName}
@@ -83,7 +86,9 @@ const RSVPForm = () => {
 
         <ScrollReveal delay={0.15}>
           <label className="block">
-            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">Phone Number</span>
+            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
+              Phone Number
+            </span>
             <input
               type="tel"
               value={phone}
@@ -95,32 +100,69 @@ const RSVPForm = () => {
           </label>
         </ScrollReveal>
 
+        {/* ATTENDING toggle (Lovable colours + slower silk animation) */}
         <ScrollReveal delay={0.2}>
-          <label className="block">
-            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">Number Attending</span>
-            <div className="flex items-center gap-4 mt-2">
-              <button
-                type="button"
-                onClick={() => setNumberAttending(Math.max(1, numberAttending - 1))}
-                className="w-9 h-9 rounded-full border border-border text-foreground flex items-center justify-center hover:border-primary transition-colors text-base"
+          <div className="block">
+            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
+              Attending
+            </span>
+
+            <button
+              type="button"
+              onClick={() => setPlusOne((v) => !v)}
+              className="mt-2 flex items-center gap-3 group cursor-pointer"
+              aria-pressed={plusOne}
+            >
+              {/* Pill */}
+              <motion.div
+                className="w-10 h-[22px] rounded-full border relative overflow-hidden"
+                animate={{
+                  backgroundColor: plusOne ? "hsl(var(--primary))" : "rgba(0,0,0,0)",
+                  borderColor: plusOne ? "hsl(var(--primary))" : "hsl(var(--border))",
+                }}
+                transition={{ duration: 0.85, ease: easeSilk }}
               >
-                −
-              </button>
-              <span className="text-lg font-medium text-foreground w-6 text-center">{numberAttending}</span>
-              <button
-                type="button"
-                onClick={() => setNumberAttending(Math.min(10, numberAttending + 1))}
-                className="w-9 h-9 rounded-full border border-border text-foreground flex items-center justify-center hover:border-primary transition-colors text-base"
-              >
-                +
-              </button>
-            </div>
-          </label>
+                {/* Knob (Lovable colours) */}
+                <motion.div
+                  className="absolute top-[3px] w-3.5 h-3.5 rounded-full"
+                  style={{ left: 3 }}
+                  animate={{
+                    x: plusOne ? 18 : 0,
+                    backgroundColor: plusOne
+                      ? "hsl(var(--primary-foreground))"
+                      : "hsla(var(--primary))",
+                  }}
+                  transition={{
+                    duration: 0.85,
+                    ease: easeSilk,
+                  }}
+                />
+              </motion.div>
+
+              {/* Text (slower cross-fade) */}
+              <span className="relative h-[14px] overflow-hidden">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.span
+                    key={plusOne ? "with-guest" : "just-me"}
+                    initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -6, filter: "blur(2px)" }}
+                    transition={{ duration: 0.6, ease: easeSilk }}
+                    className="block text-[12px] tracking-[0.2em] uppercase text-muted-foreground group-hover:text-foreground transition-colors"
+                  >
+                    {plusOne ? "Attending With A Guest" : "Just Me"}
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+            </button>
+          </div>
         </ScrollReveal>
 
         <ScrollReveal delay={0.25}>
           <label className="block">
-            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">Note For The Couple</span>
+            <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
+              Note For The Couple
+            </span>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
@@ -161,7 +203,9 @@ const RSVPForm = () => {
             className="mt-6 max-w-sm mx-auto border border-primary/50 px-6 py-4 text-center"
           >
             <p className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground font-body mt-1">
-              Thank You. Your RSVP Has Been Received.<br />We Look Forward To Celebrating With You!
+              Thank You. Your RSVP Has Been Received.
+              <br />
+              We Look Forward To Celebrating With You!
             </p>
           </motion.div>
         )}
