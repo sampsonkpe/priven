@@ -4,6 +4,7 @@ import SplashScreen from "../components/SplashScreen";
 import WeddingContent from "../components/WeddingContent";
 import RSVPForm from "../components/RSVPForm";
 import ScrollReveal from "../components/ScrollReveal";
+import PageNav from "../components/PageNav";
 
 const Home = () => {
   const [showSplash, setShowSplash] = useState(true);
@@ -18,6 +19,7 @@ const Home = () => {
 
       {!showSplash && (
         <>
+          <PageNav />
           {/* Subtle watermark */}
           <div
             aria-hidden="true"
