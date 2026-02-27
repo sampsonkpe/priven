@@ -7,7 +7,6 @@ const Splash = () => {
   const navigate = useNavigate();
 
   const goHome = () => {
-    // optional: mark as seen so refresh doesn’t keep showing splash
     try {
       sessionStorage.setItem("priven_splash_seen", "1");
     } catch {
@@ -16,7 +15,7 @@ const Splash = () => {
     navigate("/home", { replace: true });
   };
 
-  // Optional: if already seen in this session, skip splash automatically
+  // Optional: skip splash if already seen this session
   useEffect(() => {
     try {
       if (sessionStorage.getItem("priven_splash_seen") === "1") {
