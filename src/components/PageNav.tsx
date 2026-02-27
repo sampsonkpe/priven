@@ -5,7 +5,7 @@ const navLinks = [
   { to: "/", label: "Home" },
   { to: "/moments", label: "Moments" },
   { to: "/blessings", label: "Blessings" },
-  { to: "/order-of-service", label: "Order of Service" },
+  { to: "/programme", label: "Programme" },
 ];
 
 const PageNav = () => {
