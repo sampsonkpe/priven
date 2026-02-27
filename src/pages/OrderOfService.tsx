@@ -2,15 +2,15 @@ import ScrollReveal from "../components/ScrollReveal";
 import PageNav from "../components/PageNav";
 
 const programme = [
-  { time: "11:00 AM", title: "Processional", note: "Entrance of the bridal party" },
-  { time: "11:15 AM", title: "Opening Prayer", note: "Invocation and welcome" },
-  { time: "11:25 AM", title: "Scripture Reading", note: "The Word of God" },
-  { time: "11:35 AM", title: "Celebrations", note: "Songs of praise and adoration" },
-  { time: "11:55 AM", title: "Message", note: "The wedding sermon" },
-  { time: "12:20 PM", title: "Exchange of Vows", note: "The covenant of marriage" },
-  { time: "12:35 PM", title: "Signing of Register", note: "Making it official" },
-  { time: "12:45 PM", title: "Recessional", note: "Exit of the married couple" },
-  { time: "1:00 PM", title: "Reception", note: "Celebration and fellowship" },
+  { time: "12:00 PM", title: "Processional", note: "Entrance of the bridal party" },
+  { time: "12:15 PM", title: "Opening Prayer", note: "Invocation and welcome" },
+  { time: "12:25 PM", title: "Scripture Reading", note: "The Word of God" },
+  { time: "12:35 PM", title: "Celebrations", note: "Songs of praise and adoration" },
+  { time: "12:55 PM", title: "Message", note: "The wedding sermon" },
+  { time: "1:20 PM", title: "Exchange of Vows", note: "The covenant of marriage" },
+  { time: "1:35 PM", title: "Signing of Register", note: "Making it official" },
+  { time: "1:45 PM", title: "Recessional", note: "Exit of the married couple" },
+  { time: "2:00 PM", title: "Reception", note: "Celebration and fellowship" },
 ];
 
 const Programme = () => (
@@ -47,7 +47,7 @@ const Programme = () => (
       </ScrollReveal>
       <div className="h-16" />
 
-      <ScrollReveal>
+      {/* <ScrollReveal>
         <div className="aspect-[16/9] overflow-hidden">
           <img
             src="/images/hero-couple.png"
@@ -56,7 +56,7 @@ const Programme = () => (
             loading="lazy"
           />
         </div>
-      </ScrollReveal>
+      </ScrollReveal> */}
 
       <div className="h-16" />
 

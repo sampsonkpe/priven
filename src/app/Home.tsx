@@ -8,6 +8,9 @@ import PageNav from "../components/PageNav";
 
 const Home = () => {
   const [showSplash, setShowSplash] = useState(() => {
+    const [showSplash, setShowSplash] = useState(() => {
+  });
+
     if (typeof window === "undefined") return true;
     return sessionStorage.getItem("priven_splash_seen") !== "1";
   });
@@ -21,7 +24,13 @@ const Home = () => {
     <div className="grain-bg bg-background min-h-screen relative">
       <AnimatePresence mode="wait">
         {showSplash && (
-          <SplashScreen key="splash" onDismiss={handleDismissSplash} />
+          <SplashScreen
+            key="splash"
+            onDismiss={() => {
+              sessionStorage.setItem("priven_splash_seen", "1");
+              setShowSplash(false);
+            }}
+          />
         )}
       </AnimatePresence>
 
