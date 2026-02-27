@@ -3,23 +3,12 @@ import WeddingContent from "../components/WeddingContent";
 import RSVPForm from "../components/RSVPForm";
 import ScrollReveal from "../components/ScrollReveal";
 import PageNav from "../components/PageNav";
+import SiteShell from "../components/SiteShell";
 
 const Home = () => {
   return (
-    <div className="grain-bg bg-background min-h-screen relative">
+    <SiteShell>
       <PageNav />
-
-      {/* Subtle watermark */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 flex items-start justify-center pt-24 sm:pt-28"
-      >
-        <img
-          src="/privenlogo.png"
-          alt=""
-          className="w-[420px] sm:w-[600px] opacity-[0.025] blur-[0.1px]"
-        />
-      </div>
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -29,7 +18,6 @@ const Home = () => {
           ease: [0.25, 0.1, 0.256, 1],
           delay: 0.1,
         }}
-        className="relative z-10"
       >
         <WeddingContent />
         <RSVPForm />
@@ -50,7 +38,7 @@ const Home = () => {
           </footer>
         </ScrollReveal>
       </motion.div>
-    </div>
+    </SiteShell>
   );
 };
 

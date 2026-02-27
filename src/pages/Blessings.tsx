@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ScrollReveal from "../components/ScrollReveal";
 import PageNav from "../components/PageNav";
+import SiteShell from "../components/SiteShell";
 
 const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -13,36 +14,21 @@ const Blessings = () => {
       await navigator.clipboard.writeText("0550686035");
       setCopied(true);
       window.setTimeout(() => setCopied(false), 1800);
-    } catch {
-      // clipboard may be blocked; silently ignore
-    }
+    } catch {}
   };
 
   const categories = [
-    {
-      title: "Honeymoon Fund",
-      desc: "Help us create unforgettable memories on our first journey together.",
-    },
-    {
-      title: "New Home Fund",
-      desc: "Contribute towards building our first home as one.",
-    },
-    {
-      title: "Ministry & Vision Fund",
-      desc: "Support the vision God has placed on our hearts.",
-    },
-    {
-      title: "General Blessing",
-      desc: "A gift of love, however it moves you.",
-    },
+    { title: "Honeymoon Fund", desc: "Help us create unforgettable memories on our first journey together." },
+    { title: "New Home Fund", desc: "Contribute towards building our first home as one." },
+    { title: "Ministry & Vision Fund", desc: "Support the vision God has placed on our hearts." },
+    { title: "General Blessing", desc: "A gift of love, however it moves you." },
   ] as const;
 
   return (
-    <div className="grain-bg bg-background min-h-screen">
+    <SiteShell>
       <PageNav />
 
       <main className="px-6 pt-32 pb-24 max-w-lg mx-auto text-center">
-        {/* Intro */}
         <ScrollReveal>
           <p className="font-body text-[12px] sm:text-xs tracking-[0.12em] uppercase text-muted-foreground leading-relaxed max-w-sm mx-auto">
             Your presence is the greatest gift. Should you wish to bless us further…
@@ -50,12 +36,9 @@ const Blessings = () => {
         </ScrollReveal>
 
         <div className="h-20" />
-        <ScrollReveal>
-          <div className="gold-divider" />
-        </ScrollReveal>
+        <ScrollReveal><div className="gold-divider" /></ScrollReveal>
         <div className="h-20" />
 
-        {/* Categories (no selection state) */}
         <ScrollReveal>
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-10">
             Choose A Blessing
@@ -82,12 +65,9 @@ const Blessings = () => {
         </div>
 
         <div className="h-20" />
-        <ScrollReveal>
-          <div className="gold-divider" />
-        </ScrollReveal>
+        <ScrollReveal><div className="gold-divider" /></ScrollReveal>
         <div className="h-20" />
 
-        {/* MoMo Details (centred) */}
         <ScrollReveal>
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-10">
             Mobile Money Details
@@ -154,7 +134,7 @@ const Blessings = () => {
       </main>
 
       <AnimatePresence>{/* (kept empty intentionally) */}</AnimatePresence>
-    </div>
+    </SiteShell>
   );
 };
 

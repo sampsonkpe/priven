@@ -1,5 +1,6 @@
 import ScrollReveal from "../components/ScrollReveal";
 import PageNav from "../components/PageNav";
+import SiteShell from "../components/SiteShell";
 
 const programme = [
   { time: "12:00 PM", title: "Processional", note: "Entrance of the bridal party" },
@@ -14,11 +15,10 @@ const programme = [
 ];
 
 const Programme = () => (
-  <div className="grain-bg bg-background min-h-screen">
+  <SiteShell>
     <PageNav />
 
     <main className="px-6 pt-32 pb-24 max-w-lg mx-auto text-center">
-      {/* Header */}
       <ScrollReveal>
         <h1 className="font-serif text-2xl sm:text-3xl tracking-[0.15em] uppercase text-foreground">
           Order of Service
@@ -47,20 +47,8 @@ const Programme = () => (
       </ScrollReveal>
       <div className="h-16" />
 
-      {/* <ScrollReveal>
-        <div className="aspect-[16/9] overflow-hidden">
-          <img
-            src="/images/hero-couple.png"
-            alt="Prince Charles and Venissa"
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        </div>
-      </ScrollReveal> */}
-
       <div className="h-16" />
 
-      {/* Timeline */}
       <div className="max-w-sm mx-auto text-center">
         {programme.map((item, i) => (
           <ScrollReveal key={item.title} delay={i * 0.06}>
@@ -94,7 +82,7 @@ const Programme = () => (
         </p>
       </footer>
     </main>
-  </div>
+  </SiteShell>
 );
 
 export default Programme;
