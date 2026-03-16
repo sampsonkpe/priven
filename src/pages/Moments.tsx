@@ -12,7 +12,7 @@ const Moments = () => {
   // preload hero image
   useEffect(() => {
     const img = new Image();
-    img.src = "/images/hero-couple.png";
+    img.src = "/images/hero-couple.jpg";
   }, []);
 
   // lock scroll when lightbox is open
@@ -37,7 +37,7 @@ const Moments = () => {
         className="w-full min-h-[72vh] sm:min-h-[78vh] md:min-h-[84vh] relative overflow-hidden"
       >
         <img
-          src="/images/hero-couple.png"
+          src="/images/hero-couple.jpg"
           alt="Prince Charles and Venissa"
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ objectPosition: "50% 16%" }}
@@ -98,7 +98,14 @@ const Moments = () => {
 
               <div className="flex-1 w-full">
                 <ScrollReveal delay={0.15}>
-                  <div className="aspect-[4/5] overflow-hidden">
+                  <motion.button
+                    type="button"
+                    onClick={() => setLightboxImage(section.image)}
+                    className="w-full aspect-[4/5] overflow-hidden"
+                    animate={{ scale: 1 }}
+                    whileHover={{ scale: 1.03 }}
+                    transition={{ type: "spring", stiffness: 120, damping: 16 }}
+                  >
                     <img
                       src={section.image}
                       alt={section.title}
@@ -107,7 +114,7 @@ const Moments = () => {
                       decoding="async"
                       fetchPriority="low"
                     />
-                  </div>
+                  </motion.button>
                 </ScrollReveal>
               </div>
             </div>
@@ -144,10 +151,11 @@ const Moments = () => {
               <motion.button
                 key={image.id}
                 type="button"
-                whileHover={{ scale: 1.015 }}
-                transition={{ duration: 0.35, ease: easeSilk }}
                 className="break-inside-avoid overflow-hidden cursor-pointer w-full text-left"
                 style={{ height: image.height }}
+                animate={{ scale: 1 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ type: "spring", stiffness: 120, damping: 16 }}
                 onClick={() => setLightboxImage(image.src)}
               >
                 <img
@@ -201,6 +209,29 @@ const Moments = () => {
               onClick={(e) => e.stopPropagation()}
             />
 
+            {/* Download icon */}
+            <a
+              href={lightboxImage!}
+              download
+              className="absolute top-6 right-20 w-10 h-10 rounded-full border border-primary text-primary bg-background/40 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+              onClick={(e) => e.stopPropagation()}
+              aria-label="Download"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                className="transition-colors duration-300 group-hover:stroke-current"
+              >
+                <path d="M12 3v12m0 0l4-4m-4 4l-4-4M4 17h16" />
+              </svg>
+            </a>
+
+            {/* Close button */}
             <button
               type="button"
               onClick={(e) => {
@@ -208,7 +239,7 @@ const Moments = () => {
                 setLightboxImage(null);
               }}
               aria-label="Close"
-              className="absolute top-6 right-6 w-10 h-10 rounded-full border border-border/60 bg-background/40 backdrop-blur-sm flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary/60 transition-colors"
+              className="absolute top-6 right-6 w-10 h-10 rounded-full border border-primary text-primary bg-background/40 backdrop-blur-sm flex items-center justify-center transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
             >
               <svg
                 width="18"
@@ -216,6 +247,7 @@ const Moments = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
+                className="transition-colors duration-300"
               >
                 <path
                   d="M6 6L18 18M18 6L6 18"
