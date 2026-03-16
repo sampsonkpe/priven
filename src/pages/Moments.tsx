@@ -201,7 +201,7 @@ const Moments = () => {
             <motion.img
               initial={{ scale: 0.96, opacity: 0, filter: "blur(6px)" }}
               animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-              exit={{ scale: 0.96, opacity: 0, filter: "blur(6px)" }}
+              exit={{ scale: 0.95, opacity: 0, filter: "blur(6px)" }}
               transition={{ duration: 0.55, ease: easeSilk }}
               src={lightboxImage}
               alt="Moment"
