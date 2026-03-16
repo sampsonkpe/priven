@@ -15,7 +15,7 @@ const SiteShell = ({ children }: Props) => {
         <img
           src="/privenlogo.png"
           alt=""
-          className="w-[420px] sm:w-[600px] opacity-[0.065] blur-[0.1px]"
+          className="w-[420px] sm:w-[600px] opacity-[0.06] blur-[0.1px] mix-blend-soft-light"
         />
       </div>
 

@@ -9,6 +9,12 @@ const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
 const Moments = () => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
+  // preload hero image
+  useEffect(() => {
+    const img = new Image();
+    img.src = "/images/hero-couple.png";
+  }, []);
+
   // lock scroll when lightbox is open
   useEffect(() => {
     if (!lightboxImage) return;
@@ -35,13 +41,12 @@ const Moments = () => {
           alt="Prince Charles and Venissa"
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ objectPosition: "50% 16%" }}
+          fetchPriority="high"
         />
 
-        {/* Premium gradient overlays */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0.12)_35%,transparent_65%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/70" />
 
-        {/* Title */}
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
@@ -57,7 +62,6 @@ const Moments = () => {
           </motion.h1>
         </div>
 
-        {/* Bottom fade */}
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </motion.div>
 
@@ -100,6 +104,8 @@ const Moments = () => {
                       alt={section.title}
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      decoding="async"
+                      fetchPriority="low"
                     />
                   </div>
                 </ScrollReveal>
@@ -124,17 +130,19 @@ const Moments = () => {
         </ScrollReveal>
         <div className="h-24" />
 
-        {/* Masonry Grid */}
+        {/* Gallery Title */}
         <ScrollReveal>
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-12">
             Moments We Treasure
           </p>
         </ScrollReveal>
 
-        <div className="columns-2 md:columns-3 gap-3 space-y-3">
-          {galleryImages.map((image, i) => (
-            <ScrollReveal key={image.id} delay={i * 0.04}>
+        {/* Masonry Grid */}
+        <ScrollReveal>
+          <div className="columns-2 md:columns-3 gap-3 space-y-3">
+            {galleryImages.map((image) => (
               <motion.button
+                key={image.id}
                 type="button"
                 whileHover={{ scale: 1.015 }}
                 transition={{ duration: 0.35, ease: easeSilk }}
@@ -147,11 +155,13 @@ const Moments = () => {
                   alt={image.alt}
                   className="w-full h-full object-cover"
                   loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
                 />
               </motion.button>
-            </ScrollReveal>
-          ))}
-        </div>
+            ))}
+          </div>
+        </ScrollReveal>
 
         <div className="h-16" />
 
@@ -173,6 +183,10 @@ const Moments = () => {
             transition={{ duration: 0.35, ease: easeSilk }}
             className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-6"
             onClick={() => setLightboxImage(null)}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setLightboxImage(null);
+            }}
+            tabIndex={0}
             role="dialog"
             aria-modal="true"
           >
