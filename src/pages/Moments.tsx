@@ -5,9 +5,9 @@ import PageNav from "../components/PageNav";
 import { narrativeSections, galleryImages } from "./MomentsData";
 
 const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
-const [heroLoaded, setHeroLoaded] = useState(false);
 
 const Moments = () => {
+  const [heroLoaded, setHeroLoaded] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
   // preload hero image
@@ -133,11 +133,11 @@ const Moments = () => {
           </div>
         ))}
 
-        <div className="h-24" />
+        <div className="h-16" />
         <ScrollReveal>
           <div className="gold-divider" />
         </ScrollReveal>
-        <div className="h-24" />
+        <div className="h-16" />
 
         {/* Gallery Title */}
         <ScrollReveal>
@@ -173,14 +173,20 @@ const Moments = () => {
           </div>
         </ScrollReveal>
 
-        <div className="h-16" />
+      <div className="h-14" />
+      <ScrollReveal>
+        <div className="gold-divider" />
+      </ScrollReveal>
 
-        <footer className="py-10 text-center flex flex-col items-center justify-center gap-6">
-          <div className="gold-divider" />
-          <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
+      <div className="h-10" />
+
+      <ScrollReveal>
+        <footer className="pb-20 text-center">
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
             With Love & Joy
           </p>
         </footer>
+      </ScrollReveal>
       </main>
 
       {/* Lightbox */}

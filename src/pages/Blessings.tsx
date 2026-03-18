@@ -28,19 +28,15 @@ const Blessings = () => {
           </p>
         </ScrollReveal>
 
-        <div className="h-20" />
+        <div className="h-16" />
         <ScrollReveal>
           <div className="gold-divider" />
         </ScrollReveal>
-        <div className="h-20" />
+        <div className="h-16" />
 
         {/* Single Blessings Card */}
         <ScrollReveal>
           <section className="max-w-md mx-auto text-center">
-            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-10">
-              Blessings
-            </p>
-
             <motion.div
               whileHover={{ y: -2 }}
               transition={{ duration: 0.45, ease: easeSilk }}
@@ -59,11 +55,11 @@ const Blessings = () => {
               {/* MTN */}
               <div className="text-center space-y-3">
                 <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60">
-                  MTN
+                  MTN Mobile Money
                 </p>
 
                 <p className="font-serif text-sm tracking-[0.18em] text-foreground uppercase">
-                  055 068 6035
+                  0550686035
                 </p>
 
                 <button
@@ -85,7 +81,7 @@ const Blessings = () => {
                 </p>
 
                 <p className="font-serif text-sm tracking-[0.18em] text-foreground uppercase">
-                  020 955 0277
+                  0209550277
                 </p>
 
                 <button
@@ -99,9 +95,9 @@ const Blessings = () => {
 
               {/* Reference */}
               <div className="text-center pt-2">
-                <p className="font-body text-[10px] tracking-[0.18em] uppercase text-muted-foreground/70 italic">
+                <p className="font-body text-[10px] tracking-[0.18em] uppercase text-muted-foreground/70">
                   Reference:{" "}
-                  <span className="text-foreground/80 not-italic">
+                  <span className="text-foreground not-italic">
                     PRIVEN2026
                   </span>
                 </p>
@@ -110,19 +106,20 @@ const Blessings = () => {
           </section>
         </ScrollReveal>
 
-        <div className="h-20" />
-        <ScrollReveal>
-          <div className="gold-divider" />
-        </ScrollReveal>
+      <div className="h-14" />
+      <ScrollReveal>
+        <div className="gold-divider" />
+      </ScrollReveal>
 
-        <div className="h-16" />
+      <div className="h-10" />
 
-        <footer className="py-10 text-center flex flex-col items-center justify-center gap-6">
-          <div className="gold-divider" />
-          <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
+      <ScrollReveal>
+        <footer className="pb-20 text-center">
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
             With Love & Joy
           </p>
         </footer>
+      </ScrollReveal>
       </main>
 
       <AnimatePresence>{/* intentionally empty */}</AnimatePresence>

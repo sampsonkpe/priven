@@ -22,7 +22,7 @@ const Home = () => {
         <WeddingContent />
         <RSVPForm />
 
-        <div className="h-4" />
+        <div className="h-5" />
 
         <ScrollReveal>
           <div className="gold-divider" />
