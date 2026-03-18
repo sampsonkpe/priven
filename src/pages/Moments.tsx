@@ -10,13 +10,7 @@ const Moments = () => {
   const [heroLoaded, setHeroLoaded] = useState(false);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
 
-  // preload hero image
-  useEffect(() => {
-    const img = new Image();
-    img.src = "/images/hero-couple.jpg";
-  }, []);
-
-  // lock scroll when lightbox is open
+  // Lock scroll when lightbox is open
   useEffect(() => {
     if (!lightboxImage) return;
     const prev = document.body.style.overflow;
@@ -34,31 +28,28 @@ const Moments = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.4, ease: easeSilk }}
+        transition={{ duration: 1.2, ease: easeSilk }}
         className="w-full min-h-[72vh] sm:min-h-[78vh] md:min-h-[84vh] relative overflow-hidden"
       >
         <img
-          src="/images/hero-couple.jpg"
+          src="/images/hero-couple.webp"
           alt="Prince Charles and Venissa"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-full object-cover"
           style={{ objectPosition: "50% 16%" }}
           fetchPriority="high"
+          decoding="async"
           onLoad={() => setHeroLoaded(true)}
         />
-
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0.12)_35%,transparent_65%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background/70" />
 
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.h1
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={heroLoaded ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.8, delay: 3, ease: easeSilk }}
+            transition={{ duration: 1.6, delay: 2.5, ease: easeSilk }}
             className="font-serif text-4xl sm:text-5xl tracking-[0.26em] uppercase text-white text-center px-6"
-            style={{
-              textShadow:
-                "0 4px 18px rgba(0,0,0,0.45), 0 1px 6px rgba(0,0,0,0.35)",
-            }}
+            style={{ willChange: "opacity, transform" }}
           >
             Moments
           </motion.h1>
@@ -67,7 +58,8 @@ const Moments = () => {
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent" />
       </motion.div>
 
-      <main className="px-6 pt-24 pb-24 max-w-2xl mx-auto">
+      <main className="px-6 pt-24 pb-24 max-w-2xl mx-auto [will-change:transform]">
+
         {/* Narrative Sections */}
         {narrativeSections.map((section, i) => (
           <div key={section.title}>
@@ -86,15 +78,17 @@ const Moments = () => {
                 </ScrollReveal>
 
                 <ScrollReveal delay={0.12}>
-                  <h2 className="font-serif text-lg sm:text-xl tracking-[0.15em] uppercase text-foreground mb-4">
+                  <h2 className="font-serif text-lg sm:text-xl tracking-[0.15em] uppercase text-foreground mb-6">
                     {section.title}
                   </h2>
                 </ScrollReveal>
 
                 <ScrollReveal delay={0.2}>
-                  <p className="font-body text-[11px] sm:text-xs leading-[2] tracking-[0.12em] uppercase text-muted-foreground/80">
-                    {section.text}
-                  </p>
+                  <div className="font-body text-[11px] sm:text-xs leading-relaxed tracking-[0.12em] text-muted-foreground/80 space-y-4 uppercase">
+                    {section.text.map((paragraph, idx) => (
+                      <p key={idx}>{paragraph}</p>
+                    ))}
+                  </div>
                 </ScrollReveal>
               </div>
 
@@ -104,17 +98,16 @@ const Moments = () => {
                     type="button"
                     onClick={() => setLightboxImage(section.image)}
                     className="w-full aspect-[4/5] overflow-hidden"
-                    animate={{ scale: 1 }}
                     whileHover={{ scale: 1.03 }}
-                    transition={{ type: "spring", stiffness: 120, damping: 16 }}
+                    transition={{ duration: 0.25, ease: easeSilk }}
                   >
                     <img
                       src={section.image}
                       alt={section.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover overflow-hidden rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300"
                       loading="lazy"
                       decoding="async"
-                      fetchPriority="low"
+                      sizes="(max-width: 768px) 100vw, 50vw"
                     />
                   </motion.button>
                 </ScrollReveal>
@@ -133,31 +126,29 @@ const Moments = () => {
           </div>
         ))}
 
-        <div className="h-16" />
+        <div className="h-14" />
         <ScrollReveal>
           <div className="gold-divider" />
         </ScrollReveal>
-        <div className="h-16" />
+        <div className="h-14" />
 
-        {/* Gallery Title */}
+        {/* Gallery */}
         <ScrollReveal>
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-12">
             Moments We Treasure
           </p>
         </ScrollReveal>
 
-        {/* Masonry Grid */}
         <ScrollReveal>
-          <div className="columns-2 md:columns-3 gap-3 space-y-3">
+          <div className="columns-2 md:columns-3 gap-3 space-y-3 [contain:layout_paint]">
             {galleryImages.map((image) => (
               <motion.button
                 key={image.id}
                 type="button"
-                className="break-inside-avoid overflow-hidden rounded-2xl cursor-pointer w-full text-left shadow-sm hover:shadow-lg transition-shadow duration-300"
+                className="break-inside-avoid overflow-hidden rounded-2xl w-full shadow-sm hover:shadow-lg transition-shadow duration-300"
                 style={{ height: image.height }}
-                animate={{ scale: 1 }}
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 120, damping: 16 }}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2, ease: easeSilk }}
                 onClick={() => setLightboxImage(image.src)}
               >
                 <img
@@ -166,27 +157,27 @@ const Moments = () => {
                   className="w-full h-full object-cover rounded-2xl"
                   loading="lazy"
                   decoding="async"
-                  fetchPriority="low"
+                  sizes="(max-width: 768px) 50vw, 33vw"
                 />
               </motion.button>
             ))}
           </div>
         </ScrollReveal>
 
-      <div className="h-14" />
-      <ScrollReveal>
-        <div className="gold-divider" />
-      </ScrollReveal>
+        {/* Footer */}
+        <div className="h-14" />
+        <ScrollReveal>
+          <div className="gold-divider" />
+        </ScrollReveal>
+        <div className="h-10" />
 
-      <div className="h-10" />
-
-      <ScrollReveal>
-        <footer className="pb-20 text-center">
-          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-6">
-            With Love & Joy
-          </p>
-        </footer>
-      </ScrollReveal>
+        <ScrollReveal>
+          <footer className="pb-20 text-center">
+            <p className="font-serif text-[10px] tracking-[0.4em] uppercase">
+              With Love & Joy
+            </p>
+          </footer>
+        </ScrollReveal>
       </main>
 
       {/* Lightbox */}
@@ -196,24 +187,19 @@ const Moments = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: easeSilk }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-6"
             onClick={() => setLightboxImage(null)}
-            onKeyDown={(e) => {
-              if (e.key === "Escape") setLightboxImage(null);
-            }}
-            tabIndex={0}
-            role="dialog"
-            aria-modal="true"
           >
             <motion.img
-              initial={{ scale: 0.96, opacity: 0, filter: "blur(6px)" }}
-              animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-              exit={{ scale: 0.95, opacity: 0, filter: "blur(6px)" }}
-              transition={{ duration: 0.55, ease: easeSilk }}
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.96, opacity: 0 }}
+              transition={{ duration: 0.4, ease: easeSilk }}
               src={lightboxImage}
               alt="Moment"
-              className="max-w-full max-h-[85vh] object-contain cursor-zoom-out"
+              className="max-w-full max-h-[85vh] object-contain"
+              style={{ willChange: "transform, opacity" }}
               onClick={(e) => e.stopPropagation()}
             />
 
