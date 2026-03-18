@@ -7,22 +7,15 @@ import SiteShell from "../components/SiteShell";
 const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const Blessings = () => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
 
-  const handleCopyNumber = async () => {
+  const handleCopyNumber = async (number: string) => {
     try {
-      await navigator.clipboard.writeText("0550686035");
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      await navigator.clipboard.writeText(number);
+      setCopied(number);
+      window.setTimeout(() => setCopied(null), 1800);
     } catch {}
   };
-
-  const categories = [
-    { title: "Honeymoon Fund", desc: "Help us create unforgettable memories on our first journey together." },
-    { title: "New Home Fund", desc: "Contribute towards building our first home as one." },
-    { title: "Ministry & Vision Fund", desc: "Support the vision God has placed on our hearts." },
-    { title: "General Blessing", desc: "A gift of love, however it moves you." },
-  ] as const;
 
   return (
     <SiteShell>
@@ -36,91 +29,90 @@ const Blessings = () => {
         </ScrollReveal>
 
         <div className="h-20" />
-        <ScrollReveal><div className="gold-divider" /></ScrollReveal>
+        <ScrollReveal>
+          <div className="gold-divider" />
+        </ScrollReveal>
         <div className="h-20" />
 
+        {/* Single Blessings Card */}
         <ScrollReveal>
-          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-10">
-            Choose A Blessing
-          </p>
-        </ScrollReveal>
+          <section className="max-w-md mx-auto text-center">
+            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-10">
+              Blessings
+            </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-          {categories.map((c, i) => (
-            <ScrollReveal key={c.title} delay={i * 0.06}>
-              <motion.div
-                whileHover={{ y: -2 }}
-                transition={{ duration: 0.45, ease: easeSilk }}
-                className="w-full p-6 border border-border hover:border-primary/50 transition-colors"
-              >
-                <h3 className="font-serif text-sm tracking-[0.12em] text-foreground mb-2 uppercase">
-                  {c.title}
-                </h3>
-                <p className="font-body text-[10px] tracking-[0.08em] uppercase text-muted-foreground leading-relaxed">
-                  {c.desc}
+            <motion.div
+              whileHover={{ y: -2 }}
+              transition={{ duration: 0.45, ease: easeSilk }}
+              className="border border-border/60 rounded-2xl px-8 py-10 flex flex-col gap-10"
+            >
+              {/* Account Name */}
+              <div className="text-center">
+                <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-2">
+                  Account Name
                 </p>
-              </motion.div>
-            </ScrollReveal>
-          ))}
-        </div>
+                <p className="font-serif text-sm tracking-[0.12em] text-foreground uppercase">
+                  Venissa Akyirefua Sam
+                </p>
+              </div>
 
-        <div className="h-20" />
-        <ScrollReveal><div className="gold-divider" /></ScrollReveal>
-        <div className="h-20" />
+              {/* MTN */}
+              <div className="text-center space-y-3">
+                <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60">
+                  MTN
+                </p>
 
-        <ScrollReveal>
-          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-10">
-            Mobile Money Details
-          </p>
-        </ScrollReveal>
+                <p className="font-serif text-sm tracking-[0.18em] text-foreground uppercase">
+                  055 068 6035
+                </p>
 
-        <ScrollReveal delay={0.05}>
-          <div className="border border-border p-10 max-w-sm mx-auto space-y-8 text-center">
-            <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-2">
-                Account Name
-              </p>
-              <p className="font-serif text-sm tracking-[0.12em] text-foreground uppercase">
-                Venissa Akyirefua Sam
-              </p>
-            </div>
-
-            <div className="w-8 h-px bg-primary/20 mx-auto" />
-
-            <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-2">
-                Network
-              </p>
-              <p className="font-serif text-sm tracking-[0.12em] text-foreground uppercase">
-                MTN
-              </p>
-            </div>
-
-            <div className="w-8 h-px bg-primary/20 mx-auto" />
-
-            <div>
-              <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60 mb-2">
-                Number
-              </p>
-              <p className="font-serif text-sm tracking-[0.18em] text-foreground uppercase">
-                0550686035
-              </p>
-
-              <p className="mt-4 font-body text-[10px] tracking-[0.18em] uppercase text-muted-foreground/70 italic">
-                Reference: <span className="text-foreground/80 not-italic">PRIVEN2026</span>
-              </p>
-
-              <div className="pt-6">
                 <button
                   type="button"
-                  onClick={handleCopyNumber}
-                  className="px-10 py-3 border border-primary text-primary font-body text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                  onClick={() => handleCopyNumber("0550686035")}
+                  className="px-8 py-2 border border-primary text-primary font-body text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 >
-                  {copied ? "Copied" : "Copy Number"}
+                  {copied === "0550686035" ? "Copied" : "Copy Number"}
                 </button>
               </div>
-            </div>
-          </div>
+
+              {/* Divider */}
+              <div className="w-8 h-px bg-primary/20 mx-auto" />
+
+              {/* Telecel */}
+              <div className="text-center space-y-3">
+                <p className="font-body text-[9px] tracking-[0.3em] uppercase text-muted-foreground/60">
+                  Telecel Cash
+                </p>
+
+                <p className="font-serif text-sm tracking-[0.18em] text-foreground uppercase">
+                  020 955 0277
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => handleCopyNumber("0209550277")}
+                  className="px-8 py-2 border border-primary text-primary font-body text-[10px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                >
+                  {copied === "0209550277" ? "Copied" : "Copy Number"}
+                </button>
+              </div>
+
+              {/* Reference */}
+              <div className="text-center pt-2">
+                <p className="font-body text-[10px] tracking-[0.18em] uppercase text-muted-foreground/70 italic">
+                  Reference:{" "}
+                  <span className="text-foreground/80 not-italic">
+                    PRIVEN2026
+                  </span>
+                </p>
+              </div>
+            </motion.div>
+          </section>
+        </ScrollReveal>
+
+        <div className="h-20" />
+        <ScrollReveal>
+          <div className="gold-divider" />
         </ScrollReveal>
 
         <div className="h-16" />
@@ -133,7 +125,7 @@ const Blessings = () => {
         </footer>
       </main>
 
-      <AnimatePresence>{/* (kept empty intentionally) */}</AnimatePresence>
+      <AnimatePresence>{/* intentionally empty */}</AnimatePresence>
     </SiteShell>
   );
 };
