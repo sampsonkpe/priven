@@ -54,7 +54,4 @@ export const galleryImages: GalleryImage[] = [
   { id: 4, src: "/images/gallery4.webp", alt: "Moment", height: 300 },
   { id: 5, src: "/images/gallery5.webp", alt: "Moment", height: 300 },
   { id: 6, src: "/images/gallery6.webp", alt: "Moment", height: 380 },
-  { id: 7, src: "/images/gallery7.webp", alt: "Moment", height: 310 },
-  { id: 8, src: "/images/gallery8.webp", alt: "Moment", height: 360 },
-  { id: 9, src: "/images/gallery9.webp", alt: "Moment", height: 310 },
 ];
