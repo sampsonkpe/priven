@@ -5,6 +5,7 @@ import PageNav from "../components/PageNav";
 import { narrativeSections, galleryImages } from "./MomentsData";
 
 const easeSilk: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const [heroLoaded, setHeroLoaded] = useState(false);
 
 const Moments = () => {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -42,6 +43,7 @@ const Moments = () => {
           className="absolute inset-0 w-full h-full object-cover object-center"
           style={{ objectPosition: "50% 16%" }}
           fetchPriority="high"
+          onLoad={() => setHeroLoaded(true)}
         />
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0.12)_35%,transparent_65%)]" />
@@ -50,8 +52,8 @@ const Moments = () => {
         <div className="absolute inset-0 flex items-center justify-center">
           <motion.h1
             initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, delay: 0.35, ease: easeSilk }}
+            animate={heroLoaded ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.8, delay: 3, ease: easeSilk }}
             className="font-serif text-4xl sm:text-5xl tracking-[0.26em] uppercase text-white text-center px-6"
             style={{
               textShadow:
@@ -151,7 +153,7 @@ const Moments = () => {
               <motion.button
                 key={image.id}
                 type="button"
-                className="break-inside-avoid overflow-hidden cursor-pointer w-full text-left"
+                className="break-inside-avoid overflow-hidden rounded-2xl cursor-pointer w-full text-left shadow-sm hover:shadow-lg transition-shadow duration-300"
                 style={{ height: image.height }}
                 animate={{ scale: 1 }}
                 whileHover={{ scale: 1.03 }}
@@ -161,7 +163,7 @@ const Moments = () => {
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-2xl"
                   loading="lazy"
                   decoding="async"
                   fetchPriority="low"
