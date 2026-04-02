@@ -25,33 +25,40 @@ const RSVPForm = () => {
     if (!isValid || submitting) return;
 
     setSubmitting(true);
+    setSubmitting(false);
 
     try {
       if (!GOOGLE_SCRIPT_URL) throw new Error("Missing Google Script URL");
 
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: new URLSearchParams ({
-          fullName,
-          phone,
-          guestName,
-          numberAttending: String(plusOne ? 2 : 1),
-          note,
-          ua: navigator.userAgent,
+      await Promise.all([
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          body: new URLSearchParams({
+            fullName,
+            phone,
+            guestName,
+            numberAttending: String(plusOne ? 2 : 1),
+            note,
+            ua: navigator.userAgent,
+          }),
         }),
-      });
+        new Promise((resolve) => setTimeout(resolve, 1200)),
+      ]);
 
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 10000);
+      setSubmitting(false);
+      setSubmitted(true); 
 
       setFullName("");
       setPhone("");
       setPlusOne(false);
       setGuestName("");
       setNote("");
-    } catch {
-      // silently handle
+
+      setTimeout(() => setSubmitted(false), 10000);
+
+    } catch (err) {
+      console.error("RSVP ERROR:", err);
     } finally {
       setSubmitting(false);
     }
@@ -215,6 +222,8 @@ const RSVPForm = () => {
                   <span className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
                   Sending…
                 </span>
+              ) : submitted ? (
+                "RSVP Sent"
               ) : (
                 "Send RSVP"
               )}
@@ -223,7 +232,7 @@ const RSVPForm = () => {
         </ScrollReveal>
       </form>
 
-      {/* SUCCESS */}
+      {/* RESPONSE */}
       <AnimatePresence>
         {submitted && (
           <motion.div
@@ -234,10 +243,10 @@ const RSVPForm = () => {
             className="mt-6 max-w-sm mx-auto border border-primary/50 px-6 py-4 text-center"
           >
             <p className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground font-body">
-              Thank You. Your RSVP Has Been Received.
-              <br />
-              We Look Forward To Celebrating With You!
-            </p>
+                  Thank You. Your RSVP Has Been Received.
+                  <br />
+                  We Look Forward To Celebrating With You!
+                </p>
           </motion.div>
         )}
       </AnimatePresence>
