@@ -25,7 +25,6 @@ const RSVPForm = () => {
     if (!isValid || submitting) return;
 
     setSubmitting(true);
-    setSubmitting(false);
 
     try {
       if (!GOOGLE_SCRIPT_URL) throw new Error("Missing Google Script URL");
@@ -217,16 +216,43 @@ const RSVPForm = () => {
               disabled={!isValid || submitting}
               className="px-12 py-3 border border-primary text-primary font-body text-[12px] tracking-[0.3em] uppercase hover:bg-primary hover:text-primary-foreground disabled:opacity-40 disabled:cursor-not-allowed transition-all duration-300"
             >
-              {submitting ? (
-                <span className="inline-flex items-center gap-2">
-                  <span className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
-                  Sending…
-                </span>
-              ) : submitted ? (
-                "RSVP Sent"
-              ) : (
-                "Send RSVP"
-              )}
+              <span className="relative h-[16px] flex items-center justify-center overflow-hidden">
+                <AnimatePresence mode="wait" initial={false}>
+                  {submitting ? (
+                    <motion.span
+                      key="sending"
+                      initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, y: -6, filter: "blur(2px)" }}
+                      transition={{ duration: 0.5, ease: easeSilk }}
+                      className="inline-flex items-center gap-2"
+                    >
+                      <span className="w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
+                      Sending…
+                    </motion.span>
+                  ) : submitted ? (
+                    <motion.span
+                      key="sent"
+                      initial={{ opacity: 0, y: 6, filter: "blur(2px)" }}
+                      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                      exit={{ opacity: 0, y: -6, filter: "blur(2px)" }}
+                      transition={{ duration: 0.5, ease: easeSilk }}
+                    >
+                      RSVP Sent
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key="idle"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -6 }}
+                      transition={{ duration: 0.5, ease: easeSilk }}
+                    >
+                      Send RSVP
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </span>
             </button>
           </div>
         </ScrollReveal>
