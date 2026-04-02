@@ -10,11 +10,15 @@ const RSVPForm = () => {
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
   const [plusOne, setPlusOne] = useState(false);
+  const [guestName, setGuestName] = useState("");
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const isValid = fullName.trim() !== "" && phone.trim() !== "";
+  const isValid =
+    fullName.trim() !== "" &&
+    phone.trim() !== "" &&
+    (!plusOne || guestName.trim() !== "");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,12 +32,12 @@ const RSVPForm = () => {
       await fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: fullName,
+        body: new URLSearchParams ({
+          fullName,
           phone,
-          count: plusOne ? 2 : 1,
-          message: note,
+          guestName,
+          numberAttending: String(plusOne ? 2 : 1),
+          note,
           ua: navigator.userAgent,
         }),
       });
@@ -44,9 +48,10 @@ const RSVPForm = () => {
       setFullName("");
       setPhone("");
       setPlusOne(false);
+      setGuestName("");
       setNote("");
     } catch {
-      // silently handle for now
+      // silently handle
     } finally {
       setSubmitting(false);
     }
@@ -68,6 +73,7 @@ const RSVPForm = () => {
       </ScrollReveal>
 
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-4 font-body">
+        {/* FULL NAME */}
         <ScrollReveal delay={0.1}>
           <label className="block">
             <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
@@ -78,12 +84,13 @@ const RSVPForm = () => {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
-              className="mt-1 w-full border-b border-border bg-transparent py-2 text-sm uppercase tracking-wider text-foreground placeholder:text-muted-foreground/40 placeholder:normal-case focus:border-primary focus:outline-none transition-colors"
+              className="mt-1 w-full border-b border-border bg-transparent py-2 text-sm tracking-wider text-foreground placeholder:text-muted-foreground/40 placeholder:normal-case focus:border-primary focus:outline-none transition-colors"
               placeholder="Your full name"
             />
           </label>
         </ScrollReveal>
 
+        {/* PHONE */}
         <ScrollReveal delay={0.15}>
           <label className="block">
             <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
@@ -100,7 +107,7 @@ const RSVPForm = () => {
           </label>
         </ScrollReveal>
 
-        {/* ATTENDING toggle (Lovable colours + slower silk animation) */}
+        {/* TOGGLE */}
         <ScrollReveal delay={0.2}>
           <div className="block">
             <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
@@ -117,12 +124,12 @@ const RSVPForm = () => {
               <motion.div
                 className="w-10 h-[22px] rounded-full border relative overflow-hidden"
                 animate={{
-                  backgroundColor: plusOne ? "hsl(var(--primary))" : "rgba(0,0,0,0)",
+                  backgroundColor: plusOne ? "hsl(var(--primary))" : "transparent",
                   borderColor: plusOne ? "hsl(var(--primary))" : "hsl(var(--border))",
                 }}
                 transition={{ duration: 0.85, ease: easeSilk }}
               >
-                {/* Knob (Lovable colours) */}
+                {/* Knob */}
                 <motion.div
                   className="absolute top-[3px] w-3.5 h-3.5 rounded-full"
                   style={{ left: 3 }}
@@ -130,16 +137,13 @@ const RSVPForm = () => {
                     x: plusOne ? 18 : 0,
                     backgroundColor: plusOne
                       ? "hsl(var(--primary-foreground))"
-                      : "hsla(var(--primary))",
+                      : "hsl(var(--muted-foreground) / 0.4)",
                   }}
-                  transition={{
-                    duration: 0.85,
-                    ease: easeSilk,
-                  }}
+                  transition={{ duration: 0.85, ease: easeSilk }}
                 />
               </motion.div>
 
-              {/* Text (slower cross-fade) */}
+              {/* Text */}
               <span className="relative h-[14px] overflow-hidden">
                 <AnimatePresence mode="wait" initial={false}>
                   <motion.span
@@ -158,6 +162,31 @@ const RSVPForm = () => {
           </div>
         </ScrollReveal>
 
+        {/* PLUS ONE FIELD */}
+        <AnimatePresence>
+          {plusOne && (
+            <ScrollReveal delay={0.22}>
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.6, ease: easeSilk }}
+              >
+                <label className="block">
+                  <input
+                    type="text"
+                    value={guestName}
+                    onChange={(e) => setGuestName(e.target.value)}
+                    className="mt-1 w-full border-b border-border bg-transparent py-2 text-sm tracking-wider text-foreground placeholder:text-muted-foreground/40 focus:border-primary focus:outline-none transition-colors"
+                    placeholder="Guest's name"
+                  />
+                </label>
+              </motion.div>
+            </ScrollReveal>
+          )}
+        </AnimatePresence>
+
+        {/* NOTE */}
         <ScrollReveal delay={0.25}>
           <label className="block">
             <span className="text-[12px] tracking-[0.3em] uppercase text-muted-foreground">
@@ -173,6 +202,7 @@ const RSVPForm = () => {
           </label>
         </ScrollReveal>
 
+        {/* SUBMIT */}
         <ScrollReveal delay={0.3}>
           <div className="pt-4 text-center">
             <button
@@ -193,16 +223,17 @@ const RSVPForm = () => {
         </ScrollReveal>
       </form>
 
+      {/* SUCCESS */}
       <AnimatePresence>
         {submitted && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{ duration: 1, ease: easeSilk }}
             className="mt-6 max-w-sm mx-auto border border-primary/50 px-6 py-4 text-center"
           >
-            <p className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground font-body mt-1">
+            <p className="text-[12px] uppercase tracking-[0.1em] text-muted-foreground font-body">
               Thank You. Your RSVP Has Been Received.
               <br />
               We Look Forward To Celebrating With You!
