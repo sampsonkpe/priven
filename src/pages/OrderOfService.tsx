@@ -3,15 +3,25 @@ import PageNav from "../components/PageNav";
 import SiteShell from "../components/SiteShell";
 
 const programme = [
-  { time: "12:00 PM", title: "Processional", note: "Entrance of the bridal party" },
-  { time: "12:15 PM", title: "Opening Prayer", note: "Invocation and welcome" },
-  { time: "12:25 PM", title: "Scripture Reading", note: "The Word of God" },
-  { time: "12:35 PM", title: "Celebrations", note: "Songs of praise and adoration" },
-  { time: "12:55 PM", title: "Message", note: "The wedding sermon" },
-  { time: "1:20 PM", title: "Exchange of Vows", note: "The covenant of marriage" },
-  { time: "1:35 PM", title: "Signing of Register", note: "Making it official" },
-  { time: "1:45 PM", title: "Recessional", note: "Exit of the married couple" },
-  { time: "2:00 PM", title: "Reception", note: "Celebration and fellowship" },
+  { time: "12:00 PM - 12:45 PM", title: "Welcoming", note: "Seating of Guests" },
+  { time: "12:45 PM - 12:55 PM", title: "Musical Interlude", note: "Dal & Rhoda" },
+  { time: "12:55 PM - 1:00 PM", title: "Opening Prayer", note: "Ps. Eric Fosu" },
+  { time: "1:00 PM - 1:10 PM", title: "Worship", note: "FAM Choir" },
+  { time: "1:10 PM - 1:15 PM", title: "Groom's Procession", note: "DJ Reverend" },
+  { time: "1:15 PM - 1:20 PM", title: "Bride's Procession", note: "Piano Interlude by Paa Joe" },
+  { time: "1:20 PM - 1:35 PM", title: "Exchange of Vows", note: "Rev. Roderick Agyekum" },
+  { time: "1:35 PM - 1:50 PM", title: "Clergy Prayers", note: "Prayers & Declaration of Marriage" },
+  { time: "1:50 PM - 1:55 PM", title: "Song Ministration 01", note: "Rhoda" },
+  { time: "1:55 PM - 2:00 PM", title: "Song Ministration 02", note: "Michael Ashitey" },
+  { time: "2:00 PM - 2:35 PM", title: "Sermon & Altar Call", note: "Rev. Roderick Agyekum" },
+  { time: "2:35 PM - 2:40 PM", title: "Couple's Communion" },
+  { time: "2:40 PM - 2:50 PM", title: "Introduction of Couple", note: "FAM Choir" },
+  { time: "2:50 PM - 3:00 PM", title: "Love Gift", note: "FAM Choir/Michael Ashitey" },
+  { time: "3:00 PM - 3:05 PM", title: "Handing Over of Marriage Certificate", note: "Lady Harriet Fosu" },
+  { time: "3:05 PM - 3:15 PM", title: "Vote of Thanks & Announcements", note: "Sika & Praise" },
+  { time: "3:15 PM - 3:20 PM", title: "Closing Prayer", note: "Ps. Elton Afflu" },
+  { time: "3:20 PM - 4:00 PM", title: "Order of Photography" },
+  { time: "4:00 PM", title: "MC Praise takes over", note: "Couple Recesses, with Instrumentals from the band" },
 ];
 
 const Programme = () => (
