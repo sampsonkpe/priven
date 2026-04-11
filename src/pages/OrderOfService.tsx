@@ -13,7 +13,7 @@ const programme = [
   { time: "1:35 PM - 1:50 PM", title: "Clergy Prayers", note: "Prayers & Declaration of Marriage" },
   { time: "1:50 PM - 1:55 PM", title: "Song Ministration 01", note: "Rhoda" },
   { time: "1:55 PM - 2:00 PM", title: "Song Ministration 02", note: "Michael Ashitey" },
-  { time: "2:00 PM - 2:35 PM", title: "Sermon & Altar Call", note: "Rev. Roderick Agyekum" },
+  { time: "2:00 PM - 2:35 PM", title: "Sermon & Altar Call", note: "Ps. Elton Afflu" },
   { time: "2:35 PM - 2:40 PM", title: "Couple's Communion" },
   { time: "2:40 PM - 2:50 PM", title: "Introduction of Couple", note: "FAM Choir" },
   { time: "2:50 PM - 3:00 PM", title: "Love Gift", note: "FAM Choir/Michael Ashitey" },
@@ -24,7 +24,24 @@ const programme = [
   { time: "4:00 PM", title: "MC Praise takes over", note: "Couple Recesses, with Instrumentals from the band" },
 ];
 
-const Programme = () => (
+const officiatingMinister = "Rev. Roderick Agyekum";
+
+const clergy = [
+  "Ps. Eric Fosu",
+  "Ps. George Addai",
+  "Ps. Elton Afflu",
+  "Ps. Victoria Oliver",
+  "Rev. Dr. Jewel Ewoade",
+];
+
+const bridalParty = {
+  bestMan: "Blaise Quainoo",
+  maidOfHonour: "Roseline Owusuaa Dartey",
+  groomsman: "Sampson Kojo Kpe",
+  bridesmaid: "Lily Araba Sackey",
+};
+
+const OrderofService = () => (
   <SiteShell>
     <PageNav />
 
@@ -52,11 +69,14 @@ const Programme = () => (
       </ScrollReveal>
 
       <div className="h-16" />
+
       <ScrollReveal>
         <div className="gold-divider" />
       </ScrollReveal>
+
       <div className="h-10" />
 
+      {/* Programme */}
       <div className="max-w-sm mx-auto text-center">
         {programme.map((item, i) => (
           <ScrollReveal key={item.title} delay={i * 0.06}>
@@ -69,9 +89,11 @@ const Programme = () => (
                 {item.title}
               </h2>
 
-              <p className="font-body text-[11px] tracking-[0.16em] uppercase text-muted-foreground/70">
-                {item.note}
-              </p>
+              {item.note && (
+                <p className="font-body text-[11px] tracking-[0.16em] uppercase text-muted-foreground/70">
+                  {item.note}
+                </p>
+              )}
 
               {i < programme.length - 1 && (
                 <div className="mt-5 mx-auto w-6 h-px bg-primary/20" />
@@ -82,6 +104,115 @@ const Programme = () => (
       </div>
 
       <div className="h-10" />
+      <ScrollReveal>
+        <div className="gold-divider" />
+      </ScrollReveal>
+
+      <div className="h-16" />
+
+      {/* Officiating Minister */}
+      <ScrollReveal>
+        <h2 className="font-serif text-lg tracking-[0.15em] uppercase text-foreground">
+          Officiating Minister
+        </h2>
+      </ScrollReveal>
+
+      <div className="h-6" />
+
+      <ScrollReveal>
+        <p className="font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+          {officiatingMinister}
+        </p>
+      </ScrollReveal>
+
+      <div className="h-14" />
+      <ScrollReveal>
+        <div className="gold-divider" />
+      </ScrollReveal>
+
+      <div className="h-14" />
+
+      {/* Clergy */}
+      <ScrollReveal>
+        <h2 className="font-serif text-lg tracking-[0.15em] uppercase text-foreground">
+          Clergy
+        </h2>
+      </ScrollReveal>
+
+      <div className="h-6" />
+
+      <div className="max-w-xs mx-auto">
+        {clergy.map((person, i) => (
+          <ScrollReveal key={person} delay={i * 0.06}>
+            <p className="py-2 font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+              {person}
+            </p>
+          </ScrollReveal>
+        ))}
+      </div>
+
+      <div className="h-14" />
+      <ScrollReveal>
+        <div className="gold-divider" />
+      </ScrollReveal>
+
+      <div className="h-14" />
+
+      {/* Bridal Party */}
+      <ScrollReveal>
+        <h2 className="font-serif text-lg tracking-[0.15em] uppercase text-foreground">
+          Bridal Party
+        </h2>
+      </ScrollReveal>
+
+      <div className="h-8" />
+
+      <div className="max-w-xs mx-auto text-center">
+        <ScrollReveal>
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-primary/70">
+            Best Man
+          </p>
+          <p className="py-2 font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+            {bridalParty.bestMan}
+          </p>
+        </ScrollReveal>
+
+        <div className="h-6" />
+
+        <ScrollReveal>
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-primary/70">
+            Maid of Honour
+          </p>
+          <p className="py-2 font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+            {bridalParty.maidOfHonour}
+          </p>
+        </ScrollReveal>
+
+        <div className="h-8" />
+
+        <ScrollReveal>
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-primary/70">
+            Groomsman
+          </p>
+          <p className="py-2 font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+            {bridalParty.groomsman}
+          </p>
+        </ScrollReveal>
+
+        <div className="h-6" />
+
+        <ScrollReveal>
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-primary/70">
+            Bridesmaid
+          </p>
+          <p className="py-2 font-body text-[11px] tracking-[0.18em] uppercase text-muted-foreground">
+            {bridalParty.bridesmaid}
+          </p>
+        </ScrollReveal>
+      </div>
+
+      <div className="h-16" />
+
       <ScrollReveal>
         <div className="gold-divider" />
       </ScrollReveal>
@@ -99,4 +230,4 @@ const Programme = () => (
   </SiteShell>
 );
 
-export default Programme;
+export default OrderofService;
