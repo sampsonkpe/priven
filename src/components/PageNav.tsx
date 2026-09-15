@@ -3,9 +3,6 @@ import { motion } from "framer-motion";
 
 const navLinks = [
   { to: "/home", label: "Home" },
-  { to: "/moments", label: "Moments" },
-  { to: "/blessings", label: "Blessings" },
-  { to: "/programme", label: "Programme" },
 ];
 
 const PageNav = () => {
